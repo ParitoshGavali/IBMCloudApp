@@ -1,9 +1,11 @@
+const cloudant = require('../cloudant/cloudantConnect')
+
 const loginmsg = (req, res, next) => {
     console.log("login controller");
     console.log(req.body);
     res.status(200).json({
         body : 'Hello from to login!',
-        name : req.body.name,
+        username : req.body.username,
         password : req.body.password,
         success : true,
     });
@@ -12,21 +14,19 @@ const loginmsg = (req, res, next) => {
 const getbalancemsg = (req,res,next) => {
     console.log("get Balance controller");
     console.log(req.body);
+    var balance = cloudant.getBalance(req.body.username,req.body.password);
     res.status(200).json({
-        body : 'Hello from getBalance!',
-        name : req.body.name,
-        password : req.body.password,
-        balance : 10000,
+        balance : balance
     });
 }
 
 const addbalancemsg = (req,res,next) => {
     console.log("Add balance controller");
     console.log(req.body);
+    var newBalance = cloudant.addFunds(req.body.username,req.body.password,req.body.amount);
     res.status(200).json({
-        body : 'Hello from addBalance!',
-        amount : req.body.amount,
-        name : req.body.name,
+        balance : newBalance,
+        username : req.body.username,
     });
 }
 

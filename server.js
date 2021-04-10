@@ -40,6 +40,25 @@ app.use('/', api);
 //     });
 // };
 
+//Cloudant
+const cloudant = require('./cloudant/cloudantConnect');
+// const fs = require('fs');
+// let temp = [{
+//         "username": "test0",
+//         "name": "John Doe",
+//         "password" : "password",
+//         "balance": 10000
+//     },
+//     {
+//         "username": "test1",
+//         "name": "John Doe",
+//         "password" : "password",
+//         "balance": 12001
+//     }
+// ];
+// fs.writeFileSync('./database/account.json',JSON.stringify(temp,null,4),'utf8');
+cloudant.cloudantConnect();
+
 // Catch any bad requests
 app.get('*', (req, res) => {
     res.status(200).json({
