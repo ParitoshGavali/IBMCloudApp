@@ -29,7 +29,7 @@ const getbalancemsg = (req,res,next) => {
 const addbalancemsg = (req,res,next) => {
     console.log("Add balance controller");
     console.log(req.body);
-    var newBalance = cloudant.addFunds(req.body.username,req.body.password,req.body.amount);
+    var newBalance = cloudant.addFunds(req.body.username,req.body.password,parseInt(req.body.amount));
     res.status(200).json({
         balance : newBalance,
         username : req.body.username,
