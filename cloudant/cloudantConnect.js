@@ -64,7 +64,7 @@ async function cloudantConnect(){
     catch {
         console.log("Error in conencting to Cloudant");
     }
-    return;
+    return delay(5000);
 };
 
 function getBalance(username,password){
