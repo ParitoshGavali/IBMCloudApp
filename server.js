@@ -44,9 +44,9 @@ async function Initilisation(){
     app.use('/', api);
     //Cloudant
     const cloudant = require('./cloudant/cloudantConnect');
-    cloudant.cloudantConnect(()=>{
-        console.log("please work!");
-    });
+    // cloudant.cloudantConnect(()=>{
+    //     console.log("please work!");
+    // });
 
     console.log("??");
     // Catch any bad requests
