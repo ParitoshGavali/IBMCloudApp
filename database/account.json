@@ -3,7 +3,7 @@
         "username": "test0",
         "name": "John Doe",
         "password": "password",
-        "balance": 12000
+        "balance": 13000
     },
     {
         "username": "test1",
@@ -15,6 +15,6 @@
         "username": "test2",
         "name": "Barry Allen",
         "password": "password",
-        "balance": 6000
+        "balance": 9000
     }
 ]

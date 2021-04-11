@@ -71,6 +71,20 @@ async function cloudantConnect(){
     });
 };
 
+function login(username,password){
+    console.log("login");
+    for(i in localdata){
+        if(localdata[i].username == username){
+            if(localdata[i].password == password){
+                console.log("entry found!");
+                return localdata[i].name;
+            }
+        }
+    }
+    console.log("No entry found!");
+    return false;
+};
+
 function getBalance(username,password){
     console.log("get balance");
     for(i in localdata){
@@ -131,4 +145,5 @@ module.exports = {
     cloudantConnect,
     getBalance,
     addFunds,
+    login
 };
