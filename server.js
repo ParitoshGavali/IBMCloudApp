@@ -37,25 +37,29 @@ Initilisation();
 
 async function Initilisation(){
     
-    // Require Route
-    const api = require('./routes/routes');
-    
-    // Configure app to use route
-    app.use('/', api);
-    //Cloudant
-    const cloudant = require('./cloudant/cloudantConnect');
-    // cloudant.cloudantConnect(()=>{
-    //     console.log("please work!");
-    // });
+    try {
+        // Require Route
+        const api = require('./routes/routes');
+        
+        // Configure app to use route
+        app.use('/', api);
+        //Cloudant
+        const cloudant = require('./cloudant/cloudantConnect');
+        // cloudant.cloudantConnect(()=>{
+        //     console.log("please work!");
+        // });
 
-    console.log("??");
-    // Catch any bad requests
-    app.get('*', (req, res) => {
-        res.status(200).json({
-            msg: 'Catch All'
+        console.log("??");
+        // Catch any bad requests
+        app.get('*', (req, res) => {
+            res.status(200).json({
+                msg: 'Catch All'
+            });
         });
-    });
-
+    }
+    catch(e){
+        console.log(e);
+    }
 }
 // Configure our server to listen on the port defiend by our port variable
 app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`));
