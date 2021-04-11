@@ -4,7 +4,8 @@ const localDatabasePath = "./database/account.json";
 const fs = require('fs');
 const databaseName = "cloud_database";
 var cloudant;
-var database,accounts,_id,_rev,localdata;
+var database,accounts,_id,_rev
+var localdata;
 
 async function cloudantConnect(){
     
@@ -36,7 +37,6 @@ async function cloudantConnect(){
                 accounts = await database.get(docID);
                 console.log("Succecssfully fetched!");
                 
-                localdata = [];
                 console.log("Updataing local database..");
                 for(var key in accounts){
                     if(key=="_id"){
@@ -44,7 +44,7 @@ async function cloudantConnect(){
                     }else if(key=="_rev"){
                         _rev = accounts[key];
                     }else {
-                        localdata.push(accounts[key]);
+                        localdata = accounts[key];
                     }
                 }
                 // console.log(localdata);
@@ -66,16 +66,19 @@ async function cloudantConnect(){
     }
 };
 
-
 function getBalance(username,password){
     console.log("get balance");
     for(i in localdata){
-        if(localdata[i].username === username){
-            if(localdata[i].password === password){
+        console.log("%s %s",localdata[i].username,localdata[i].password)
+        if(localdata[i].username == username){
+            if(localdata[i].password == password){
+                console.log("entry found!");
                 return localdata[i].balance;
             }
         }
     }
+    console.log("No entry found!");
+    return -1;
 };
 
 function addFunds(username,password,funds){
@@ -107,7 +110,7 @@ async function pushData(){
         await database.insert({
             _id:_id,
             _rev:_rev,
-            localdata,
+            data:localdata,
         });
         console.log("data successfully pushed!");
     }

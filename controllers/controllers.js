@@ -15,6 +15,7 @@ const getbalancemsg = (req,res,next) => {
     console.log("get Balance controller");
     console.log(req.body);
     var balance = cloudant.getBalance(req.body.username,req.body.password);
+    console.log("balance : %d",balance);
     res.status(200).json({
         balance : balance
     });
