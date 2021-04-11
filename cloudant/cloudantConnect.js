@@ -37,9 +37,9 @@ async function cloudantConnect(){
                 docID = await databaseData["rows"][0]["id"];
                 accounts = await database.get(docID);
                 console.log("Succecssfully fetched!");
-                
                 console.log("Updataing local database..");
                 for(var key in accounts){
+                    console.log(key);
                     if(key=="_id"){
                         _id = accounts[key];
                     }else if(key=="_rev"){
@@ -74,7 +74,6 @@ async function cloudantConnect(){
 function getBalance(username,password){
     console.log("get balance");
     for(i in localdata){
-        console.log("%s %s",localdata[i].username,localdata[i].password)
         if(localdata[i].username == username){
             if(localdata[i].password == password){
                 console.log("entry found!");
@@ -112,11 +111,15 @@ function addFunds(username,password,funds){
 
 async function pushData(){
     try {
+        console.log("%s %s",_id,_rev);
         await database.insert({
             _id:_id,
             _rev:_rev,
             data:localdata,
         });
+        databaseData = await database.list(databaseName,{include_docs:true});
+        _id = await databaseData["rows"][0]["id"];
+        _rev = await databaseData["rows"][0]["value"]["rev"];
         console.log("data successfully pushed!");
     }
     catch(e){
