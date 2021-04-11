@@ -3,17 +3,12 @@ const cloudant = require('../cloudant/cloudantConnect')
 const loginmsg = (req, res, next) => {
     console.log("login controller");
     console.log(req.body);
-    var check = cloudant.login(req.body.username,req.body.password);
-    if (check == false){
-        res.status(200).json({
-            valid : check
-        });
-    } else {
-        res.status(200).json({
-            name : check,
-            valid : true
-        });
-    }
+    res.status(200).json({
+        body : 'Hello from to login!',
+        username : req.body.username,
+        password : req.body.password,
+        success : true,
+    });
 };
 
 const getbalancemsg = (req,res,next) => {

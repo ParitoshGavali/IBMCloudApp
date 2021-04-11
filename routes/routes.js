@@ -3,8 +3,8 @@ const router = express.Router();
 const controllers = require('./../controllers/controllers');
 
 router.post('/login', controllers.loginmsg);
-router.put('/addFunds', controllers.addbalancemsg);
-router.get('/getBalance', controllers.getbalancemsg);
+router.post('/addBalance', controllers.addbalancemsg);
+router.post('/getBalance', controllers.getbalancemsg);
 
 // router.post('/addBalance', function(req,res){
 //     console.log(req.body);
