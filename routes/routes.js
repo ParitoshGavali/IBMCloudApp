@@ -4,7 +4,7 @@ const controllers = require('./../controllers/controllers');
 
 router.post('/login', controllers.loginmsg);
 router.put('/addFunds', controllers.addbalancemsg);
-router.post('/getBalance', controllers.getbalancemsg);
+router.get('/getBalance', controllers.getbalancemsg);
 
 // router.post('/addBalance', function(req,res){
 //     console.log(req.body);
