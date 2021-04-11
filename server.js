@@ -25,46 +25,37 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 
-// Require Route
-const api = require('./routes/routes');
-
-// Configure app to use route
-app.use('/', api);
-
 // This middleware informs the express application to serve our compiled React files
 // if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-//     app.use(express.static(path.join(__dirname, 'client/build')));
-
-//     app.get('*', function (req, res) {
-//         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-//     });
+    //     app.use(express.static(path.join(__dirname, 'client/build')));
+    
+    //     app.get('*', function (req, res) {
+        //         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+        //     });
 // };
+Initilisation();
 
-//Cloudant
-const cloudant = require('./cloudant/cloudantConnect');
-// const fs = require('fs');
-// let temp = [{
-//         "username": "test0",
-//         "name": "John Doe",
-//         "password" : "password",
-//         "balance": 10000
-//     },
-//     {
-//         "username": "test1",
-//         "name": "John Doe",
-//         "password" : "password",
-//         "balance": 12001
-//     }
-// ];
-// fs.writeFileSync('./database/account.json',JSON.stringify(temp,null,4),'utf8');
-cloudant.cloudantConnect();
-
-// Catch any bad requests
-app.get('*', (req, res) => {
-    res.status(200).json({
-        msg: 'Catch All'
+async function Initilisation(){
+    
+    // Require Route
+    const api = require('./routes/routes');
+    
+    // Configure app to use route
+    app.use('/', api);
+    //Cloudant
+    const cloudant = require('./cloudant/cloudantConnect');
+    cloudant.cloudantConnect(()=>{
+        console.log("please work!");
     });
-});
 
+    console.log("??");
+    // Catch any bad requests
+    app.get('*', (req, res) => {
+        res.status(200).json({
+            msg: 'Catch All'
+        });
+    });
+
+}
 // Configure our server to listen on the port defiend by our port variable
 app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`));

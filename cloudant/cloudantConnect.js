@@ -2,6 +2,7 @@ const Cloudant = require("@cloudant/cloudant");
 const json = require("body-parser/lib/types/json");
 const localDatabasePath = "./database/account.json";
 const fs = require('fs');
+const { resolve } = require("path");
 const databaseName = "cloud_database";
 var cloudant;
 var database,accounts,_id,_rev
@@ -64,7 +65,10 @@ async function cloudantConnect(){
     catch {
         console.log("Error in conencting to Cloudant");
     }
-    return delay(5000);
+    console.log("initalisation done!");
+    return new Promise((resolve,reject)=>{
+        resolve();
+    });
 };
 
 function getBalance(username,password){
