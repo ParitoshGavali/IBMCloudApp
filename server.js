@@ -35,7 +35,7 @@ app.use(cors());
 // };
 Initilisation();
 
-async function Initilisation(){
+function Initilisation(){
     
     try {
         // Require Route
